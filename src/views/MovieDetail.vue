@@ -3,11 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mt-5">
-          <h3 class="text-white">{{this.movie.Title}}</h3>
-          <h4 class="text-white">{{this.movie.Year}}</h4>
+          <h3 class="text-white">{{movie.Title}}</h3>
+          <h4 class="text-white">{{movie.Year}}</h4>
           <img class="mt-3" v-bind:src="movie.Poster">
         </div>
-        <div class="col-md-6 mt-5 text-white">{{this.movie.Plot}}</div>
+        <div class="col-md-6 mt-5 text-white">{{movie.Plot}}</div>
     </div>
   </div>
   </div>
