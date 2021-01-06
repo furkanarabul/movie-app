@@ -29,8 +29,8 @@
           <router-link :to="'/movie/' + movie.imdbID" >
             <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" >
               <div class="movie-details mt-3">
-                <p>{{movie.Title}}</p>
-                <p>{{movie.Year}}</p>
+                <p class="year">{{movie.Year}}</p>
+                <p class="title">{{movie.Title}}</p>
               </div>
           </router-link>  
         </li>
@@ -73,16 +73,6 @@ export default {
   padding: 0;
 }
 .home {
-  a {
-  text-decoration: none;
-  color:#cad5e0 !important;
-
-  }
-  a:hover {
-    opacity: 1;
-    color:white!important;
-    transition: all 0.5s ease;
-  }
   .feature-card {
     position: relative;
   }
@@ -125,31 +115,37 @@ export default {
       &[type="text"] {
         width: 100%;
         color: white;
-        background-color: #496583;
+        background-color:#171719;
+        border: 1px solid gray;
         font-size: 20px;
         padding: 10px 16px;
         border-radius: 8px;
         margin-bottom: 15px;
         transition: 0.4s;
         &::placeholder {
-          color: #f3f3f3;
+          color:gray;
         }
         &:focus {
-          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+          opacity: 1;
         }
       }
       &[type="submit"] {
         width: 100%;
         max-width: 300px;
-        background-color: #42b883;
+        background-color: #f7af2b;
         padding: 16px;
         border-radius: 8px;
-        color: #fff;
+        color: #5f420c;
         font-size: 20px;
         text-transform: uppercase;
         transition: 0.4s;
+        font-weight: 700;
+        &:hover {
+          background-color: #e49f1f;
+          transition: 0.4s;
+        }
         &:active {
-          background-color: #309668;
+          background-color: #cc8d19;
         }
       }
     }
@@ -167,13 +163,25 @@ export default {
         width: 300px;
         height: fit-content;
         border-radius: 8px;
-        background-color: #496583;
-        
+        background-color: #3d3d3d;
+        &:hover{
+          background-color: #171719;
+          border: 1px solid #2d2d30;
+          transition: all 0.4s ease;
+          cursor: pointer;
+        }
         img{
           object-fit: cover;
           max-width: 100%;
           min-height: 80%;
           
+        }
+      }
+      .movie-details{
+        .year{
+          font-size: 14px;
+          font-weight: 700;
+          color:#cad5e0;
         }
       }
     }

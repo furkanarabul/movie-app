@@ -22,23 +22,29 @@
   }
 }
 body {
-  background-color: #35495e;
+  background-color: #222124;
 }
 a {
   text-decoration: none;
+  color:#cad5e0 !important;
+  }
+  a:hover {
+    opacity: 1;
+    color:white!important;
+    transition: all 0.5s ease;
 }
 header {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
-  background-color: #2c3d4e;
+  background-color: #171718;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
 }
 h1 {
   color: #fff;
   span {
-    color: #42b883;
+    color: #f7af2b;
     font-weight: 700;
   }
 }
