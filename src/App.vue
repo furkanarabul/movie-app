@@ -26,12 +26,12 @@ body {
 }
 a {
   text-decoration: none;
-  color:#cad5e0 !important;
-  }
-  a:hover {
-    opacity: 1;
-    color:white!important;
-    transition: all 0.5s ease;
+  color: #cad5e0 !important;
+}
+a:hover {
+  opacity: 1;
+  color: white !important;
+  transition: all 0.5s ease;
 }
 header {
   display: flex;
