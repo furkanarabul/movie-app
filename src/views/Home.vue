@@ -25,16 +25,16 @@
     </form>
     <div class="movies-list">
       <ul class="movie-container">
-        <li v-for="movie in movieList" :key="movie.imdbID" >
-          <router-link :to="'/movie/' + movie.imdbID" >
-            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" >
-              <div class="movie-details mt-3">
-                <p class="year">{{movie.Year}}</p>
-                <p class="title">{{movie.Title}}</p>
-              </div>
-          </router-link>  
+        <li v-for="movie in movieList" :key="movie.imdbID">
+          <router-link :to="'/movie/' + movie.imdbID">
+            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
+            <div class="movie-details mt-3">
+              <p class="year">{{ movie.Year }}</p>
+              <p class="title">{{ movie.Title }}</p>
+            </div>
+          </router-link>
         </li>
-      </ul>  
+      </ul>
     </div>
   </div>
 </template>
@@ -46,21 +46,20 @@ export default {
   data() {
     return {
       search: "",
-      movieList: []
+      movieList: [],
     };
   },
   methods: {
     searchMovie: function () {
       if (this.search != "") {
         axios
-          .get(`http://www.omdbapi.com/?apikey=f9179f20&s=${this.search}`)
+          .get(`https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}`)
           .then((response) => {
             console.log(response.data);
-            this.movieList = response.data.Search
-            console.log(this.movieList)
-            this.search = ""
+            this.movieList = response.data.Search;
+            console.log(this.movieList);
+            this.search = "";
           });
-          
       }
     },
   },
@@ -115,7 +114,7 @@ export default {
       &[type="text"] {
         width: 100%;
         color: white;
-        background-color:#171719;
+        background-color: #171719;
         border: 1px solid gray;
         font-size: 20px;
         padding: 10px 16px;
@@ -123,7 +122,7 @@ export default {
         margin-bottom: 15px;
         transition: 0.4s;
         &::placeholder {
-          color:gray;
+          color: gray;
         }
         &:focus {
           opacity: 1;
@@ -150,38 +149,37 @@ export default {
       }
     }
   }
-  .movies-list{
+  .movies-list {
     display: flex;
-    .movie-container{
+    .movie-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       list-style-type: none;
-      li{
+      li {
         padding: 25px;
-        margin:10px;
+        margin: 10px;
         width: 300px;
         height: fit-content;
         border-radius: 8px;
         background-color: #3d3d3d;
-        &:hover{
+        &:hover {
           background-color: #171719;
           border: 1px solid #2d2d30;
           transition: all 0.4s ease;
           cursor: pointer;
         }
-        img{
+        img {
           object-fit: cover;
           max-width: 100%;
           min-height: 80%;
-          
         }
       }
-      .movie-details{
-        .year{
+      .movie-details {
+        .year {
           font-size: 14px;
           font-weight: 700;
-          color:#cad5e0;
+          color: #cad5e0;
         }
       }
     }
