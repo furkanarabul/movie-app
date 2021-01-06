@@ -1,20 +1,5 @@
 <template>
   <div class="home">
-    <!-- 
-    <div class="feature-card">
-      <router-link to="/movie/tt0409591">
-        <img
-          src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/movies-to-watch-1585258004.jpg?crop=1.00xw:1.00xh;0,0&resize=980:*"
-          class="feature-imd"
-          alt="movie"
-        />
-        <div class="detail">
-          <h3>Movie</h3>
-          <p>Desc</p>
-        </div>
-      </router-link>
-    </div>
-    -->
     <form @submit.prevent="searchMovie" class="search-box">
       <input
         v-model="search"
@@ -26,13 +11,15 @@
     <div class="movies-list">
       <ul class="movie-container">
         <li v-for="movie in movieList" :key="movie.imdbID">
-          <router-link :to="'/movie/' + movie.imdbID">
+          
             <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
             <div class="movie-details mt-3">
               <p class="year">{{ movie.Year }}</p>
               <p class="title">{{ movie.Title }}</p>
+              <router-link :to="'/movie/' + movie.imdbID">
+                <button class="details-btn">Movie Details</button>
+              </router-link>
             </div>
-          </router-link>
         </li>
       </ul>
     </div>
@@ -167,7 +154,6 @@ export default {
           background-color: #171719;
           border: 1px solid #2d2d30;
           transition: all 0.4s ease;
-          cursor: pointer;
         }
         img {
           object-fit: cover;
@@ -180,6 +166,25 @@ export default {
           font-size: 14px;
           font-weight: 700;
           color: #cad5e0;
+        }
+        .title{
+          color:#cad5e0;
+        }
+        .details-btn{
+          width: 100%;
+          appearance: none;
+          border: none;
+          outline: none;
+          background-color: #f7af2b;
+          padding: 8px;
+          border-radius: 8px;
+          color: #5f420c;
+          font-size: 14px;
+          font-weight: 700;
+          &:hover {
+            background-color: #e49f1f;
+            transition: all 0.4s ease;
+        }
         }
       }
     }
