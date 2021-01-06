@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <!-- 
     <div class="feature-card">
       <router-link to="/movie/tt0409591">
         <img
@@ -13,6 +14,7 @@
         </div>
       </router-link>
     </div>
+    -->
     <form @submit.prevent="searchMovie" class="search-box">
       <input
         v-model="search"
@@ -21,7 +23,19 @@
       />
       <input type="submit" value="Search" />
     </form>
-    <div class="movies-list">MOVIES</div>
+    <div class="movies-list">
+      <ul class="movie-container">
+        <li v-for="movie in movieList" :key="movie.imdbID" >
+          <router-link :to="'/movie/' + movie.imdbID" >
+            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" >
+              <div class="movie-details mt-3">
+                <p>{{movie.Title}}</p>
+                <p>{{movie.Year}}</p>
+              </div>
+          </router-link>  
+        </li>
+      </ul>  
+    </div>
   </div>
 </template>
 
@@ -32,6 +46,7 @@ export default {
   data() {
     return {
       search: "",
+      movieList: []
     };
   },
   methods: {
@@ -41,14 +56,33 @@ export default {
           .get(`http://www.omdbapi.com/?apikey=f9179f20&s=${this.search}`)
           .then((response) => {
             console.log(response.data);
+            this.movieList = response.data.Search
+            console.log(this.movieList)
+            this.search = ""
           });
+          
       }
     },
   },
 };
 </script>
 <style lang="scss">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .home {
+  a {
+  text-decoration: none;
+  color:#cad5e0 !important;
+
+  }
+  a:hover {
+    opacity: 1;
+    color:white!important;
+    transition: all 0.5s ease;
+  }
   .feature-card {
     position: relative;
   }
@@ -116,6 +150,30 @@ export default {
         transition: 0.4s;
         &:active {
           background-color: #309668;
+        }
+      }
+    }
+  }
+  .movies-list{
+    display: flex;
+    .movie-container{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style-type: none;
+      li{
+        padding: 25px;
+        margin:10px;
+        width: 300px;
+        height: fit-content;
+        border-radius: 8px;
+        background-color: #496583;
+        
+        img{
+          object-fit: cover;
+          max-width: 100%;
+          min-height: 80%;
+          
         }
       }
     }
