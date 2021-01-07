@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <ul class="movieList">
           <li class="movieItem" v-for="(movie, index) in movieList" :key="movie.id">
-            <router-link :to="'/movie/' + movie.id">{{ movie.title }}</router-link>
+            <router-link :to="'/movie/' + movie.imdb">{{ movie.title }}</router-link>
             <button @click="removeMovie(index)" class="removeBtn">
               <i class="fas fa-trash"></i>
             </button>
@@ -41,6 +41,7 @@ export default {
           let movieList = {
             title: response.data[key].title,
             id: key,
+            imdb: response.data[key].id,
           };
           this.movieList.push(movieList);
         }
