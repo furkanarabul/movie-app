@@ -1,25 +1,21 @@
 <template>
   <div class="home">
     <form @submit.prevent="searchMovie" class="search-box">
-      <input
-        v-model="search"
-        type="text"
-        placeholder="What are you searching for ?"
-      />
+      <input v-model="search" type="text" placeholder="What are you searching for ?" />
       <input type="submit" value="Search" />
     </form>
     <div class="movies-list">
       <ul class="movie-container">
-        <li v-for="movie in movieList" :key="movie.imdbID">
-          
-            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
-            <div class="movie-details mt-3">
-              <p class="year">{{ movie.Year }}</p>
-              <p class="title">{{ movie.Title }}</p>
-              <router-link :to="'/movie/' + movie.imdbID">
-                <button class="details-btn">Movie Details</button>
-              </router-link>
-            </div>
+        <li v-for="(movie, index) in movieList" :key="movie.imdbID">
+          <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
+          <div class="movie-details mt-3">
+            <p class="year">{{ movie.Year }}</p>
+            <p class="title">{{ movie.Title }}</p>
+            <router-link :to="'/movie/' + movie.imdbID">
+              <button class="details-btn">Movie Details</button>
+            </router-link>
+            <button @click="addToList(index)" class="add-btn mt-2">Add</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -48,6 +44,24 @@ export default {
             this.search = "";
           });
       }
+    },
+    addToList: function (index) {
+      console.log(this.movieList);
+      console.log(this.movieList[0].Title);
+      console.log(this.movieList[index].Title);
+      console.log(this.movieList[index].imdbID);
+      axios
+        .post(
+          "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
+          {
+            title: this.movieList[index].Title,
+            id: this.movieList[index].imdbID,
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        });
+      this.$alert("Movie added to your list.", "", "success");
     },
   },
 };
@@ -152,7 +166,6 @@ export default {
         background-color: #3d3d3d;
         &:hover {
           background-color: #171719;
-          border: 1px solid #2d2d30;
           transition: all 0.4s ease;
         }
         img {
@@ -167,10 +180,10 @@ export default {
           font-weight: 700;
           color: #cad5e0;
         }
-        .title{
-          color:#cad5e0;
+        .title {
+          color: #cad5e0;
         }
-        .details-btn{
+        .details-btn {
           width: 100%;
           appearance: none;
           border: none;
@@ -184,7 +197,23 @@ export default {
           &:hover {
             background-color: #e49f1f;
             transition: all 0.4s ease;
+          }
         }
+        .add-btn {
+          width: 100%;
+          appearance: none;
+          border: none;
+          outline: none;
+          background-color: #15a044;
+          padding: 8px;
+          border-radius: 8px;
+          color: #053f18;
+          font-size: 14px;
+          font-weight: 700;
+          &:hover {
+            background-color: #0f8336;
+            transition: all 0.4s ease;
+          }
         }
       }
     }

@@ -2,8 +2,14 @@
   <div>
     <header>
       <router-link to="/">
-        <h1><span>Vue</span>Movies</h1></router-link
-      >
+        <h1>
+          <span>Vue</span>Movies
+        </h1>
+      </router-link>
+
+      <router-link class="ml" to="/MyList">
+        <h2>My List</h2>
+      </router-link>
     </header>
     <main>
       <router-view />
@@ -36,16 +42,21 @@ a:hover {
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  margin:0 auto;
   padding: 10px 16px;
   background-color: #171718;
+  text-align: left;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
-}
-h1 {
-  color: #fff;
-  span {
-    color: #f7af2b;
-    font-weight: 700;
+  h1 {
+    color: #fff;
+    span {
+      color: #f7af2b;
+      font-weight: 700;
+    }
+  }
+  h2{
+    
   }
 }
 </style>
