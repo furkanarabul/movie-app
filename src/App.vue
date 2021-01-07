@@ -22,7 +22,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Helvetica";
   &::selection {
     background: transparentize(#42b883, 0.5);
   }
@@ -43,7 +42,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin:0 auto;
+  margin: 0 auto;
   padding: 10px 16px;
   background-color: #171718;
   text-align: left;
@@ -55,8 +54,7 @@ header {
       font-weight: 700;
     }
   }
-  h2{
-    
+  h2 {
   }
 }
 </style>

@@ -3,14 +3,22 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="movieList">
-          <li class="movieItem" v-for="movie in movieList" :key="movie.id">
-            <router-link :to="'/movie/' + movie.id">
-              {{
-              movie.title
-              }}
-            </router-link>
+          <li class="movieItem" v-for="(movie, index) in movieList" :key="movie.id">
+            <router-link :to="'/movie/' + movie.id">{{ movie.title }}</router-link>
+            <button @click="removeMovie(index)" class="removeBtn">
+              <i class="fas fa-trash"></i>
+            </button>
           </li>
         </ul>
+        <div v-if="isEmpty" class="empty">
+          <p>List is empty. You can search some film here</p>
+          <router-link to="/">
+            <button class="mt-3 submit">
+              Add film to the list
+              <i class="ml-3 fas fa-plus-square"></i>
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -28,15 +36,41 @@ export default {
     axios
       .get("https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
+        console.log(response.data);
         for (let key in response.data) {
           let movieList = {
             title: response.data[key].title,
-            id: response.data[key].id,
+            id: key,
           };
           this.movieList.push(movieList);
-          console.log(movieList);
         }
       });
+  },
+  computed: {
+    isEmpty: function () {
+      if (this.movieList.length == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    removeMovie: function (index) {
+      console.log(this.movieList[index].id);
+      this.$confirm("Are you sure?").then(() => {
+        axios
+          .delete(
+            "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
+              this.movieList[index].id +
+              ".json"
+          )
+          .then((response) => {
+            console.log(response);
+          });
+        this.movieList.splice(index, 1);
+      });
+    },
   },
 };
 </script>
@@ -47,15 +81,60 @@ export default {
   flex-direction: column;
   .movieItem {
     margin-top: 20px;
-    background: black;
-    opacity: 0.5;
+    background: rgb(59, 59, 59);
     min-height: 50px;
     padding: 20px;
     border-radius: 8px;
+    display: flex;
     &:hover {
-      opacity: 1;
+      background: rgb(29, 29, 29);
       transition: 0.4s;
     }
+    .removeBtn {
+      appearance: none;
+      border: none;
+      outline: none;
+      width: 50px;
+      border-radius: 5px;
+      margin-left: auto;
+      background: rgb(129, 53, 53);
+      &:hover {
+        background: rgb(161, 90, 90);
+      }
+      .fa-trash {
+        color: white;
+      }
+    }
+  }
+}
+.empty {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  p {
+    opacity: 0.5;
+  }
+}
+.submit {
+  width: 100%;
+  max-width: 300px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: #f7af2b;
+  padding: 16px;
+  border-radius: 8px;
+  color: #5f420c;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: 0.4s;
+  font-weight: 700;
+  &:hover {
+    background-color: #e49f1f;
+    transition: 0.4s;
+  }
+  &:active {
+    background-color: #cc8d19;
   }
 }
 </style>
