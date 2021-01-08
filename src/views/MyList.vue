@@ -2,6 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div class="mt-3 text-right" v-if="!isEmpty">
+          <div class="counter">You have <span>{{movieList.length}}</span> movies in your list</div>
+        </div>
         <ul class="movieList">
           <li class="movieItem" v-for="(movie, index) in movieList" :key="movie.id">
             <router-link :to="'/movie/' + movie.imdb">{{ movie.title }}</router-link>
@@ -11,7 +14,7 @@
           </li>
         </ul>
         <div v-if="isEmpty" class="empty">
-          <p>List is empty. You can search some film here</p>
+          <p>List is empty. You can search some film.</p>
           <router-link to="/">
             <button class="mt-3 submit">
               Add film to the list
@@ -19,6 +22,7 @@
             </button>
           </router-link>
         </div>
+        
       </div>
     </div>
   </div>
@@ -58,6 +62,7 @@ export default {
   },
   methods: {
     removeMovie: function (index) {
+      console.log(this.movieList.length)
       console.log(this.movieList[index].id);
       this.$confirm("Are you sure?").then(() => {
         axios
@@ -82,7 +87,9 @@ export default {
   flex-direction: column;
   .movieItem {
     margin-top: 20px;
-    background: rgb(59, 59, 59);
+    background:transparent;
+    border: 2px solid white;
+    color: white;
     min-height: 50px;
     padding: 20px;
     border-radius: 8px;
@@ -90,17 +97,19 @@ export default {
     &:hover {
       background: rgb(29, 29, 29);
       transition: 0.4s;
+      cursor: pointer;
     }
     .removeBtn {
       appearance: none;
       border: none;
       outline: none;
-      width: 50px;
+      min-height: 30px;
+      min-width: 30px;
       border-radius: 5px;
       margin-left: auto;
-      background: rgb(129, 53, 53);
+      background: rgb(180, 66, 66);
       &:hover {
-        background: rgb(161, 90, 90);
+      background: rgb(206, 67, 67);
       }
       .fa-trash {
         color: white;
@@ -136,6 +145,13 @@ export default {
   }
   &:active {
     background-color: #cc8d19;
+  }
+}
+.counter{
+  color:rgb(100, 100, 100);
+  span{
+    font-weight: 700;
+    text-decoration: underline;
   }
 }
 </style>

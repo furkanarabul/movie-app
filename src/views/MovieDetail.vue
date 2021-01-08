@@ -5,17 +5,16 @@
         <div class="col-md-6 mt-5">
           <h3 class="text-white">{{movie.Title}}</h3>
           <h4 class="text-white">{{movie.Year}}</h4>
-          <img class="mt-3" v-bind:src="movie.Poster">
+          <img class="mt-3" v-bind:src="movie.Poster" />
         </div>
         <div class="col-md-6 mt-5 text-white">{{movie.Plot}}</div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import {onBeforeMount} from 'vue';
 export default {
   data: function () {
     return {
@@ -30,7 +29,7 @@ export default {
       .then((response) => {
         let movie = [];
         this.movie = response.data;
-        console.log(this.movie.Title)
+        console.log(this.movie.Title);
       });
   },
 };

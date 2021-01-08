@@ -1,23 +1,28 @@
 <template>
-  <div class="home">
-    <form @submit.prevent="searchMovie" class="search-box">
-      <input v-model="search" type="text" placeholder="What are you searching for ?" />
-      <input type="submit" value="Search" />
-    </form>
-    <div class="movies-list">
-      <ul class="movie-container">
-        <li v-for="(movie, index) in movieList" :key="movie.imdbID">
-          <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
-          <div class="movie-details mt-3">
-            <p class="year">{{ movie.Year }}</p>
-            <p class="title">{{ movie.Title }}</p>
-            <router-link :to="'/movie/' + movie.imdbID">
-              <button class="details-btn">Movie Details</button>
-            </router-link>
-            <button @click="addToList(index)" class="add-btn mt-2">Add</button>
-          </div>
-        </li>
-      </ul>
+  <div class="container">
+    <div class="home">
+      <form @submit.prevent="searchMovie" class="search-box">
+        <input v-model="search" type="text" placeholder="What are you searching for ?" />
+        <input type="submit" value="Search" />
+      </form>
+      <div class="movies-list">
+        <ul class="movie-container">
+          <li v-for="(movie, index) in movieList" :key="movie.imdbID">
+            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
+            <div class="movie-details mt-3">
+              <p class="year">{{ movie.Year }}</p>
+              <p class="title">{{ movie.Title }}</p>
+              <router-link :to="'/movie/' + movie.imdbID">
+                <button class="details-btn">Movie Details</button>
+              </router-link>
+              <button @click="addToList(index)" class="add-btn mt-2">
+                Add to list
+                <i class="ml-1 fas fa-plus-square"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -114,9 +119,9 @@ export default {
       background: none;
       &[type="text"] {
         width: 100%;
-        color: white;
-        background-color: #171719;
-        border: 1px solid gray;
+        color: black;
+        background-color: white;
+        border: 5px solid rgb(48, 48, 48);
         font-size: 20px;
         padding: 10px 16px;
         border-radius: 8px;
@@ -163,7 +168,7 @@ export default {
         width: 300px;
         height: fit-content;
         border-radius: 8px;
-        background-color: #3d3d3d;
+        background-color: #191919;
         &:hover {
           background-color: #171719;
           transition: all 0.4s ease;
@@ -172,6 +177,7 @@ export default {
           object-fit: cover;
           max-width: 100%;
           min-height: 80%;
+          border: 5px solid white;
         }
       }
       .movie-details {
@@ -186,17 +192,19 @@ export default {
         .details-btn {
           width: 100%;
           appearance: none;
-          border: none;
+          border: 1px solid rgb(61, 61, 61);
           outline: none;
-          background-color: #f7af2b;
+          background-color: transparent;
           padding: 8px;
           border-radius: 8px;
-          color: #5f420c;
+          color: gray;
           font-size: 14px;
+          text-transform: uppercase;
           font-weight: 700;
           &:hover {
-            background-color: #e49f1f;
+            background-color: #353535;
             transition: all 0.4s ease;
+            color: white;
           }
         }
         .add-btn {
@@ -209,9 +217,10 @@ export default {
           border-radius: 8px;
           color: #053f18;
           font-size: 14px;
+          text-transform: uppercase;
           font-weight: 700;
           &:hover {
-            background-color: #0f8336;
+            background-color: #1faf4f;
             transition: all 0.4s ease;
           }
         }

@@ -3,12 +3,12 @@
     <header>
       <router-link to="/">
         <h1>
-          <span>Vue</span>Movies
+          <span>My</span>Movies
         </h1>
       </router-link>
 
       <router-link class="ml" to="/MyList">
-        <h2>My List</h2>
+        <button class="myListBtn">My List</button>
       </router-link>
     </header>
     <main>
@@ -21,13 +21,14 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Rubik", sans-serif;
   box-sizing: border-box;
   &::selection {
     background: transparentize(#42b883, 0.5);
   }
 }
 body {
-  background-color: #222124;
+  background-color: #000000;
 }
 a {
   text-decoration: none;
@@ -44,7 +45,7 @@ header {
   justify-content: space-between;
   margin: 0 auto;
   padding: 10px 16px;
-  background-color: #171718;
+  background-color: #131313;
   text-align: left;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
   h1 {
@@ -55,6 +56,23 @@ header {
     }
   }
   h2 {
+  }
+}
+.myListBtn {
+  width: 100%;
+  appearance: none;
+  border: 2px solid white;
+  outline: none;
+  background-color: transparent;
+  padding: 8px;
+  min-width: 100px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  &:hover {
+    background-color: #3f3f3f;
+    transition: all 0.4s ease;
   }
 }
 </style>
