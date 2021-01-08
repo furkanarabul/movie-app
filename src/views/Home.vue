@@ -45,7 +45,11 @@ export default {
           .then((response) => {
             console.log(response.data);
             this.movieList = response.data.Search;
-            console.log(this.movieList);
+            console.log(response.data.Response);
+            if(response.data.Response === 'False'){
+              this.$alert("Movie not found!.", "", "warning");
+              
+            }
             this.search = "";
           });
       }
