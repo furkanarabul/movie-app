@@ -24,31 +24,62 @@
         </ul>
       </div>
     </div>
+    <!--spin loader-->
+    <div class="vld-parent">
+      <loading
+        :active.sync="isLoading"
+        :can-cancel="true"
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"
+      ></loading>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
   name: "movie",
   data() {
     return {
       search: "",
       movieList: [],
+      isLoading: false,
+      fullPage: true,
     };
+  },
+  components: {
+    Loading,
   },
   methods: {
     searchMovie: function () {
+      if (this.search.trim().length == 0) {
+        this.$alert("Search query cannot be empty.", "", "warning");
+        return;
+      }
       if (this.search != "") {
         axios
           .get(`https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}`)
           .then((response) => {
             console.log(response.data);
-            this.movieList = response.data.Search;
+            // 0.5 second delay on purpose for more realistic search behavior
+            const vm = this;
+            setTimeout(() => {
+              vm.movieList = response.data.Search;
+            }, 1000);
+            console.log(vm);
+            //this.movieList = response.data.Search;
             console.log(response.data.Response);
-            if(response.data.Response === 'False'){
+            if (response.data.Response === "False") {
               this.$alert("Movie not found!.", "", "warning");
-              
+            } else {
+              this.isLoading = true;
+              // simulate AJAX
+              setTimeout(() => {
+                this.isLoading = false;
+              }, 1000);
             }
             this.search = "";
           });
@@ -71,6 +102,10 @@ export default {
           console.log(response);
         });
       this.$alert("Movie added to your list.", "", "success");
+    },
+    doAjax() {},
+    onCancel() {
+      console.log("User cancelled the loader.");
     },
   },
 };
