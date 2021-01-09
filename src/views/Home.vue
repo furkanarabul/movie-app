@@ -61,7 +61,7 @@ export default {
       }
       if (this.search != "") {
         axios
-          .get(`https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}`)
+          .get(`https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`)
           .then((response) => {
             console.log(response.data);
             // 0.5 second delay on purpose for more realistic search behavior
@@ -96,6 +96,10 @@ export default {
           {
             title: this.movieList[index].Title,
             id: this.movieList[index].imdbID,
+            poster: this.movieList[index].Poster,
+            year:this.movieList[index].Year,
+            plot:this.movieList[index].Plot,
+            rating: 5
           }
         )
         .then((response) => {

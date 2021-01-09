@@ -7,7 +7,7 @@
         </div>
         <ul class="movieList">
           <li class="movieItem" v-for="(movie, index) in movieList" :key="movie.id">
-            <router-link :to="'/movie/' + movie.imdb">{{ movie.title }}</router-link>
+            <router-link :to="{path:'/movie/' + movie.imdb,query:{firebase_id:movie.id}}">{{ movie.title }}</router-link>
             <button @click="removeMovie(index)" class="removeBtn">
               <i class="fas fa-trash"></i>
             </button>
@@ -46,6 +46,7 @@ export default {
             title: response.data[key].title,
             id: key,
             imdb: response.data[key].id,
+            rating: response.data[key].rating
           };
           this.movieList.push(movieList);
         }
@@ -62,6 +63,7 @@ export default {
   },
   methods: {
     removeMovie: function (index) {
+      console.log(this.$route)
       console.log(this.movieList.length)
       console.log(this.movieList[index].id);
       this.$confirm("Are you sure?").then(() => {

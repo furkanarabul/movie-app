@@ -11,16 +11,19 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    props: true
   },
   {
     path: "/movie/:id",
     name: "Movie Details",
     component: MovieDetail,
+    props: true
   },
   {
     path: "/MyList",
     name: "MyList",
     component: MyList,
+    props: true
   },
 ];
 
