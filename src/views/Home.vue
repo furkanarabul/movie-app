@@ -99,7 +99,7 @@ export default {
             poster: this.movieList[index].Poster,
             year:this.movieList[index].Year,
             plot:this.movieList[index].Plot,
-            rating: 5
+            rating: 0
           }
         )
         .then((response) => {
