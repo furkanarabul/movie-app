@@ -13,7 +13,15 @@
             class="mt-3"
           />
         </div>
-        <div class="col-md-6 mt-5 text-white">{{ movie.Plot }}</div>
+        <div class="col-md-6 mt-5 text-white">
+          {{ movie.Plot }}
+          <div class="col-md-4 mt-3" style="padding:0">
+            <button v-if="isMovieDetail" @click="addToList" class="add-btn mt-2">
+              Add to list
+              <i class="ml-1 fas fa-plus-square"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -53,10 +61,23 @@ export default {
     this.movie = await this.getMovieFromAPI(this.imdbId);
   },
   methods: {
+    addToList: async function (e) {
+      const sendData = await axios.post(
+        `https://movie-app-52779-default-rtdb.firebaseio.com/movieList/.json`,
+        {
+          title: this.movie.Title,
+          id: this.movie.imdbID,
+          poster: this.movie.Poster,
+          year: this.movie.Year,
+          plot: this.movie.Plot,
+          rating: 0,
+        }
+      );
+      e.target.parentElement.remove();
+      this.$alert("Movie added to your list.", "", "success");
+    },
     setRating: async function () {
       const response = await this.updateMovieRating(this.rating);
-
-      console.log(response.rating);
     },
     getMovieFromDB: async function (key) {
       const response = await axios.get(
@@ -86,5 +107,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.add-btn {
+  width: 100%;
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: #15a044;
+  padding: 8px;
+  border-radius: 8px;
+  color: #053f18;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  &:hover {
+    background-color: #1faf4f;
+    transition: all 0.4s ease;
+  }
+}
 </style>
+

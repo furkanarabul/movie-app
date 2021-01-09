@@ -2,11 +2,7 @@
   <div class="container">
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
-        <input
-          v-model="search"
-          type="text"
-          placeholder="What are you searching for ?"
-        />
+        <input v-model="search" type="text" placeholder="What are you searching for ?" />
         <input type="submit" value="Search" />
       </form>
       <div class="movies-list">
@@ -30,12 +26,7 @@
     </div>
     <!--spin loader-->
     <div class="vld-parent">
-      <loading
-        :active.sync="isLoading"
-        :can-cancel="true"
-        :on-cancel="onCancel"
-        :is-full-page="fullPage"
-      ></loading>
+      <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
     </div>
   </div>
 </template>
@@ -69,15 +60,12 @@ export default {
             `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
           )
           .then((response) => {
-            console.log(response.data);
             // 0.5 second delay on purpose for more realistic search behavior
             const vm = this;
             setTimeout(() => {
               vm.movieList = response.data.Search;
             }, 1000);
-            console.log(vm);
             //this.movieList = response.data.Search;
-            console.log(response.data.Response);
             if (response.data.Response === "False") {
               this.$alert("Movie not found!.", "", "warning");
             } else {
@@ -92,10 +80,6 @@ export default {
       }
     },
     addToList: function (index) {
-      console.log(this.movieList);
-      console.log(this.movieList[0].Title);
-      console.log(this.movieList[index].Title);
-      console.log(this.movieList[index].imdbID);
       axios
         .post(
           "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
@@ -106,9 +90,7 @@ export default {
             comment: "",
           }
         )
-        .then((response) => {
-          console.log(response);
-        });
+        .then((response) => {});
       this.$alert("Movie added to your list.", "", "success");
     },
   },

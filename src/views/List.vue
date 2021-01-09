@@ -4,7 +4,8 @@
       <div class="col-md-12">
         <div class="mt-3 text-right" v-if="!isEmpty">
           <div class="counter">
-            You have <span>{{ movieList.length }}</span> movies in your list
+            You have
+            <span>{{ movieList.length }}</span> movies in your list
           </div>
         </div>
         <ul class="movieList">
@@ -17,10 +18,7 @@
           >
             <li class="movieItem">
               {{ movie.title }}
-              <button
-                @click.stop.prevent="removeMovie(index)"
-                class="removeBtn"
-              >
+              <button @click.stop.prevent="removeMovie(index)" class="removeBtn">
                 <i class="fas fa-trash"></i>
               </button>
             </li>
@@ -52,7 +50,6 @@ export default {
     axios
       .get("https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
-        console.log(response.data);
         for (let key in response.data) {
           let movieList = {
             title: response.data[key].title,
@@ -71,9 +68,6 @@ export default {
   },
   methods: {
     removeMovie: function (index) {
-      console.log(this.$route);
-      console.log(this.movieList.length);
-      console.log(this.movieList[index].id);
       this.$confirm("Are you sure?").then(() => {
         axios
           .delete(
@@ -81,9 +75,7 @@ export default {
               this.movieList[index].id +
               ".json"
           )
-          .then((response) => {
-            console.log(response);
-          });
+          .then((response) => {});
         this.movieList.splice(index, 1);
       });
     },

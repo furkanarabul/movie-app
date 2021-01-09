@@ -7,8 +7,13 @@
         </h1>
       </router-link>
 
-      <router-link class="ml" to="/search">
-        <button class="myListBtn">Add New Movie</button>
+      <router-link v-if="!
+      notHomePage" class="ml" to="/">
+        <button class="myListBtn">My List</button>
+      </router-link>
+      <router-link v-if="
+      notHomePage" class="ml" to="/search">
+        <button class="myListBtn">Add Movie</button>
       </router-link>
     </header>
     <main>
@@ -16,6 +21,15 @@
     </main>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    notHomePage() {
+      return this.$route.path === "/";
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 * {
