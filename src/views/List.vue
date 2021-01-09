@@ -3,26 +3,38 @@
     <div class="row">
       <div class="col-md-12">
         <div class="mt-3 text-right" v-if="!isEmpty">
-          <div class="counter">You have <span>{{movieList.length}}</span> movies in your list</div>
+          <div class="counter">
+            You have <span>{{ movieList.length }}</span> movies in your list
+          </div>
         </div>
         <ul class="movieList">
-          <li class="movieItem" v-for="(movie, index) in movieList" :key="movie.id">
-            <router-link :to="{path:'/movie/' + movie.imdb,query:{firebase_id:movie.id}}">{{ movie.title }}</router-link>
-            <button @click="removeMovie(index)" class="removeBtn">
-              <i class="fas fa-trash"></i>
-            </button>
-          </li>
+          <router-link
+            v-for="(movie, index) in movieList"
+            :to="{
+              path: `/list/${movie.id}`,
+            }"
+            :key="movie.id"
+          >
+            <li class="movieItem">
+              {{ movie.title }}
+              <button
+                @click.stop.prevent="removeMovie(index)"
+                class="removeBtn"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </li>
+          </router-link>
         </ul>
         <div v-if="isEmpty" class="empty">
           <p>List is empty. You can search some film.</p>
-          <router-link to="/">
+          <router-link to="/search">
             <button class="mt-3 submit">
               Add film to the list
               <i class="ml-3 fas fa-plus-square"></i>
             </button>
           </router-link>
         </div>
-        
       </div>
     </div>
   </div>
@@ -46,7 +58,7 @@ export default {
             title: response.data[key].title,
             id: key,
             imdb: response.data[key].id,
-            rating: response.data[key].rating
+            rating: response.data[key].rating,
           };
           this.movieList.push(movieList);
         }
@@ -54,17 +66,13 @@ export default {
   },
   computed: {
     isEmpty: function () {
-      if (this.movieList.length == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.movieList.length === 0;
     },
   },
   methods: {
     removeMovie: function (index) {
-      console.log(this.$route)
-      console.log(this.movieList.length)
+      console.log(this.$route);
+      console.log(this.movieList.length);
       console.log(this.movieList[index].id);
       this.$confirm("Are you sure?").then(() => {
         axios
@@ -89,7 +97,7 @@ export default {
   flex-direction: column;
   .movieItem {
     margin-top: 20px;
-    background:transparent;
+    background: transparent;
     border: 2px solid white;
     color: white;
     min-height: 50px;
@@ -111,7 +119,7 @@ export default {
       margin-left: auto;
       background: rgb(180, 66, 66);
       &:hover {
-      background: rgb(206, 67, 67);
+        background: rgb(206, 67, 67);
       }
       .fa-trash {
         color: white;
@@ -149,9 +157,9 @@ export default {
     background-color: #cc8d19;
   }
 }
-.counter{
-  color:rgb(100, 100, 100);
-  span{
+.counter {
+  color: rgb(100, 100, 100);
+  span {
     font-weight: 700;
     text-decoration: underline;
   }

@@ -2,7 +2,11 @@
   <div class="container">
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
-        <input v-model="search" type="text" placeholder="What are you searching for ?" />
+        <input
+          v-model="search"
+          type="text"
+          placeholder="What are you searching for ?"
+        />
         <input type="submit" value="Search" />
       </form>
       <div class="movies-list">
@@ -61,7 +65,9 @@ export default {
       }
       if (this.search != "") {
         axios
-          .get(`https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`)
+          .get(
+            `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
+          )
           .then((response) => {
             console.log(response.data);
             // 0.5 second delay on purpose for more realistic search behavior
@@ -94,22 +100,16 @@ export default {
         .post(
           "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
           {
-            title: this.movieList[index].Title,
             id: this.movieList[index].imdbID,
-            poster: this.movieList[index].Poster,
-            year:this.movieList[index].Year,
-            plot:this.movieList[index].Plot,
-            rating: 0
+            title: this.movieList[index].Title,
+            rating: 0,
+            comment: "",
           }
         )
         .then((response) => {
           console.log(response);
         });
       this.$alert("Movie added to your list.", "", "success");
-    },
-    doAjax() {},
-    onCancel() {
-      console.log("User cancelled the loader.");
     },
   },
 };

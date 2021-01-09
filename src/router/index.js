@@ -1,29 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Search from "../views/Search.vue";
 import MovieDetail from "../views/MovieDetail.vue";
-import MyList from "../views/MyList.vue";
+import List from "../views/List.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-    props: true
+    name: "List",
+    component: List,
   },
   {
-    path: "/movie/:id",
-    name: "Movie Details",
+    path: "/search",
+    name: "Search",
+    component: Search,
+  },
+  {
+    path: "/movie/:imdbId",
+    name: "MovieDetail",
     component: MovieDetail,
-    props: true
   },
   {
-    path: "/MyList",
-    name: "MyList",
-    component: MyList,
-    props: true
+    path: "/list/:firebaseKey",
+    name: "MovieListDetail",
+    component: MovieDetail,
   },
 ];
 

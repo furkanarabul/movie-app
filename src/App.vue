@@ -7,8 +7,8 @@
         </h1>
       </router-link>
 
-      <router-link class="ml" to="/MyList">
-        <button class="myListBtn">My List</button>
+      <router-link class="ml" to="/search">
+        <button class="myListBtn">Add New Movie</button>
       </router-link>
     </header>
     <main>
