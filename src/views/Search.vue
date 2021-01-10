@@ -2,7 +2,11 @@
   <div class="container">
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
-        <input v-model="search" type="text" placeholder="What are you searching for ?" />
+        <input
+          v-model="search"
+          type="text"
+          placeholder="What are you searching for ?"
+        />
         <input type="submit" value="Search" />
       </form>
       <div class="movies-list">
@@ -26,7 +30,11 @@
     </div>
     <!--spin loader-->
     <div class="vld-parent">
-      <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
+      <loading
+        :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="fullPage"
+      ></loading>
     </div>
   </div>
 </template>
@@ -102,7 +110,17 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .home {
+  @media only screen and (min-width: 778px) {
+    background: no-repeat center/100% url("images/bg.jpg");
+    padding-bottom: 30rem;
+  }
+  @media only screen and (max-width: 778px) {
+    background: no-repeat center/100% url("images/bg.jpg");
+    padding-bottom: 20rem;
+  }
+
   .feature-card {
     position: relative;
   }
