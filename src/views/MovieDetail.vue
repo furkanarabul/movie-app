@@ -1,26 +1,31 @@
 <template>
-  <div class="movie-detail">
+  <div class="movie-detail mb-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mt-5 text-white">
+        <div class="col-md-6 mt-3">
+          <router-link v-if="isMovieDetail" to="/search" class="back"><i class="fas fa-long-arrow-alt-left"></i><span class="ml-2">Back to Search</span></router-link>
+          <router-link v-else to="/" class="back"><i class="fas fa-long-arrow-alt-left"></i><span class="ml-2">Back to List</span></router-link>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-3 text-white">
           <h3 class="text-white">{{ movie.Title }}</h3>
           <h4 class="text-white">{{ movie.Year }}</h4>
           <img class="mt-3" v-bind:src="movie.Poster" />
           <star-rating
+            text-class="custom-text"
             v-model="rating"
             v-if="!isMovieDetail"
+            :increment="0.5"
             @rating-selected="setRating"
-            class="mt-3"
+            class="mt-5"
           />
         </div>
         <div class="col-md-6 mt-5 text-white">
           {{ movie.Plot }}
           <div class="col-md-4 mt-3 mb-5" style="padding: 0">
-            <button
-              v-if="isMovieDetail"
-              @click="addToList"
-              class="add-btn mt-2"
-            >
+            <button v-if="isMovieDetail" @click="addToList" class="add-btn mt-2">
               Add to list
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
@@ -46,6 +51,7 @@ export default {
     };
   },
   computed: {
+    //check if request come from List or Search page
     isMovieDetail: function () {
       return this.$router.history.current.name === "MovieDetail";
     },
@@ -129,5 +135,24 @@ export default {
     transition: all 0.4s ease;
   }
 }
+.custom-text {
+  font-weight: bold;
+  font-size: 1.5em;
+  border: 1px solid #2b2b2b;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: rgb(207, 207, 207);
+  background: rgb(65, 65, 65);
+}
+span:hover{
+  color:#e49f1f;
+  transition: all 0.4s ease;
+  text-decoration: underline;
+}
+.fa-long-arrow-alt-left{
+  color:#e49f1f;
+}
+
 </style>
 
