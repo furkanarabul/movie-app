@@ -15,8 +15,12 @@
         </div>
         <div class="col-md-6 mt-5 text-white">
           {{ movie.Plot }}
-          <div class="col-md-4 mt-3" style="padding:0">
-            <button v-if="isMovieDetail" @click="addToList" class="add-btn mt-2">
+          <div class="col-md-4 mt-3 mb-5" style="padding: 0">
+            <button
+              v-if="isMovieDetail"
+              @click="addToList"
+              class="add-btn mt-2"
+            >
               Add to list
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
