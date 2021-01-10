@@ -32,6 +32,9 @@
               <i class="ml-3 fas fa-plus-square"></i>
             </button>
           </router-link>
+          <div class="vld-parent">
+            <loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
+          </div>
         </div>
       </div>
     </div>
@@ -40,13 +43,25 @@
 
 <script>
 import axios from "axios";
+import Loading from "vue-loading-overlay";
+
 export default {
   data() {
     return {
       movieList: [],
+      isLoading: false,
+      fullPage: true,
     };
   },
+  components: {
+    Loading,
+  },
   created() {
+    this.isLoading = true;
+    // simulate AJAX
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
     axios
       .get("https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
