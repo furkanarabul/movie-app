@@ -46,7 +46,7 @@
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
           </div>
-          <div class="myReview">
+          <div v-if="!isMovieDetail" class="myReview">
             <h1>My Review</h1>
             <i
               class="fas fa-quote-right float-right fa-2x"
