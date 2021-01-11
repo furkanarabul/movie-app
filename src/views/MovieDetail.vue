@@ -3,9 +3,18 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mt-3">
-          <router-link v-if="isMovieDetail" to="/search" class="back"><i class="fas fa-long-arrow-alt-left"></i><span class="ml-2">Back to Search</span></router-link>
-          <router-link v-else to="/" class="back"><i class="fas fa-long-arrow-alt-left"></i><span class="ml-2">Back to List</span></router-link>
-          
+          <router-link
+            v-if="isMovieDetail"
+            :to="{path:`/search/`,query:{searchQuery:this.$route.query.searchQuery}}"
+            class="back"
+          >
+            <i class="fas fa-long-arrow-alt-left"></i>
+            <span class="ml-2">Back to Search</span>
+          </router-link>
+          <router-link v-else to="/" class="back">
+            <i class="fas fa-long-arrow-alt-left"></i>
+            <span class="ml-2">Back to List</span>
+          </router-link>
         </div>
       </div>
       <div class="row">
@@ -145,14 +154,13 @@ export default {
   color: rgb(207, 207, 207);
   background: rgb(65, 65, 65);
 }
-span:hover{
-  color:#e49f1f;
+span:hover {
+  color: #e49f1f;
   transition: all 0.4s ease;
   text-decoration: underline;
 }
-.fa-long-arrow-alt-left{
-  color:#e49f1f;
+.fa-long-arrow-alt-left {
+  color: #e49f1f;
 }
-
 </style>
 

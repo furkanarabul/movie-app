@@ -2,11 +2,14 @@
   <div class="container">
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
-        <input
-          v-model="search"
-          type="text"
-          placeholder="What are you searching for ?"
-        />
+        <div class="col-md-12 mt-3 d-flex">
+          <input
+            v-model="search"
+            type="text"
+            placeholder="What are you searching for ?"
+          />
+          <i @click="removeQuery" class="fas fa-times-circle"></i>
+        </div>
         <input type="submit" value="Search" />
       </form>
       <div class="movies-list">
@@ -16,7 +19,12 @@
             <div class="movie-details mt-3">
               <p class="year">{{ movie.Year }}</p>
               <p class="title">{{ movie.Title }}</p>
-              <router-link :to="'/movie/' + movie.imdbID">
+              <router-link
+                :to="{
+                  path: `/movie/${movie.imdbID}`,
+                  query: { searchQuery: search },
+                }"
+              >
                 <button class="details-btn">Movie Details</button>
               </router-link>
               <button @click="addToList(index)" class="add-btn mt-2">
@@ -83,9 +91,10 @@ export default {
                 this.isLoading = false;
               }, 1000);
             }
-            this.search = "";
+            //this.search = "";
           });
       }
+      console.log(this.search);
     },
     addToList: function (index) {
       axios
@@ -100,7 +109,24 @@ export default {
         )
         .then((response) => {});
       this.$alert("Movie added to your list.", "", "success");
+      console.log(this.search);
     },
+    removeQuery: function () {
+      this.search = "";
+    },
+  },
+  async created() {
+    if (this.$route.query.searchQuery != undefined) {
+      axios
+        .get(
+          `https://www.omdbapi.com/?apikey=f9179f20&s=${this.$route.query.searchQuery}&plot=full`
+        )
+        .then((response) => {
+          console.log(response);
+          this.movieList = response.data.Search;
+          this.search = this.$route.query.searchQuery;
+        });
+    }
   },
 };
 </script>
@@ -154,6 +180,17 @@ export default {
     justify-content: center;
     padding: 16px;
     align-items: center;
+    .fa-times-circle {
+      color: black;
+      position: relative;
+      right: 35px;
+      top: 22px;
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
     input {
       display: block;
       appearance: none;
