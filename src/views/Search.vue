@@ -2,12 +2,8 @@
   <div class="container">
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
-        <div class="col-md-12 mt-3 d-flex">
-          <input
-            v-model="search"
-            type="text"
-            placeholder="What are you searching for ?"
-          />
+        <div class="col-md-12 p-0 mt-3 d-flex">
+          <input v-model="search" type="text" placeholder="Search Film" />
           <i @click="removeQuery" class="fas fa-times-circle"></i>
         </div>
         <input type="submit" value="Search" />
@@ -215,6 +211,9 @@ export default {
         }
       }
       &[type="submit"] {
+        @media only screen and (max-width: 778px) {
+          width: 50% !important;
+        }
         width: 100%;
         max-width: 300px;
         background-color: #f7af2b;
