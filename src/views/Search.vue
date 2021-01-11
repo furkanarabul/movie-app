@@ -100,7 +100,7 @@ export default {
             id: this.movieList[index].imdbID,
             title: this.movieList[index].Title,
             rating: 0,
-            comment: "",
+            review: "",
             inList: true,
           }
         )

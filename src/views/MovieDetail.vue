@@ -46,6 +46,22 @@
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
           </div>
+          <div class="myReview">
+            <h1>My Review</h1>
+            <i
+              class="fas fa-quote-right float-right fa-2x"
+              style="opacity: 0.2"
+            ></i>
+
+            <textarea
+              placeholder="Type your review"
+              class="mt-3"
+              type="text"
+              v-model="review"
+            />
+            <hr />
+            <button @click="updateMovieReview">Save Review</button>
+          </div>
         </div>
       </div>
     </div>
@@ -64,6 +80,7 @@ export default {
       imdbId: null,
       movie: null,
       rating: 0,
+      review: null,
     };
   },
   computed: {
@@ -82,6 +99,7 @@ export default {
 
       this.rating = dbRecord.rating;
       this.imdbId = dbRecord.id;
+      this.review = dbRecord.review;
     }
 
     this.movie = await this.getMovieFromAPI(this.imdbId);
@@ -105,6 +123,9 @@ export default {
     setRating: async function () {
       const response = await this.updateMovieRating(this.rating);
     },
+    setReview: async function () {
+      const response = await this.updateMovieReview(this.review);
+    },
     getMovieFromDB: async function (key) {
       const response = await axios.get(
         `https://movie-app-52779-default-rtdb.firebaseio.com/movieList/${key}/.json`
@@ -124,10 +145,19 @@ export default {
         "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
           this.$route.params.firebaseKey +
           ".json",
-        { rating: rating }
+        { rating: this.rating }
       );
 
       return response.data;
+    },
+    updateMovieReview: async function (review) {
+      const response = await axios.patch(
+        "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
+          this.$route.params.firebaseKey +
+          ".json",
+        { review: this.review }
+      );
+      this.$alert("Review saved.", "", "success");
     },
   },
 };
@@ -168,6 +198,46 @@ span:hover {
 }
 .fa-long-arrow-alt-left {
   color: #e49f1f;
+}
+.myReview {
+  h1 {
+    color: #e49f1f;
+  }
+  button {
+    width: 100%;
+    appearance: none;
+    border: none;
+    background: #e49f1f;
+    color: #312205;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5px;
+    min-height: 40px;
+    &:hover {
+      background: #c78a19;
+      transition: all 0.4s ease;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  textarea {
+    color: rgb(224, 224, 224);
+    background: rgb(15, 15, 15);
+    padding: 10px;
+    appearance: none;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    min-height: 10rem;
+
+    outline: none;
+    &:focus {
+      appearance: none;
+      border: 1px solid #e49f1f;
+      outline: none;
+    }
+  }
 }
 </style>
 
