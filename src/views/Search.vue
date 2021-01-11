@@ -101,6 +101,7 @@ export default {
             title: this.movieList[index].Title,
             rating: 0,
             comment: "",
+            inList: true,
           }
         )
         .then((response) => {});
