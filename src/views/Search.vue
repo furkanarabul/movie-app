@@ -4,7 +4,11 @@
       <form @submit.prevent="searchMovie" class="search-box">
         <div class="col-md-12 p-0 mt-3 d-flex">
           <input v-model="search" type="text" placeholder="Search Film" />
-          <i @click="removeQuery" class="fas fa-times-circle"></i>
+          <i
+            v-if="search.length > 0"
+            @click="removeQuery"
+            class="fas fa-times-circle"
+          ></i>
         </div>
         <input type="submit" value="Search" />
       </form>
