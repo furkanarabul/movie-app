@@ -3,15 +3,40 @@
     <div class="home">
       <form @submit.prevent="searchMovie" class="search-box">
         <div class="col-md-12 p-0 mt-3 d-flex">
-          <input v-model="search" type="text" placeholder="Search Film" />
+          <input
+            v-on:keyup="dropdownSearch"
+            v-model="search"
+            type="text"
+            placeholder="Search Film"
+          />
           <i
             v-if="search.length > 0"
             @click="removeQuery"
             class="fas fa-times-circle"
           ></i>
         </div>
+        <div
+          v-if="!(movieListDropdown === undefined)"
+          class="col-md-8 col-sm-8 col-10 text-white dropdown"
+        >
+          <ul>
+            <li v-for="movie in movieListDropdown" :key="movie.imdbID">
+              <router-link
+                class="text-white"
+                :to="{
+                  path: `/movie/${movie.imdbID}`,
+                  query: { searchQuery: search },
+                }"
+              >
+                {{ movie.Title }}
+                <span class="float-right">{{ movie.Year }}</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
         <input type="submit" value="Search" />
       </form>
+
       <div class="movies-list">
         <ul class="movie-container">
           <li v-for="(movie, index) in movieList" :key="movie.imdbID">
@@ -57,6 +82,7 @@ export default {
     return {
       search: "",
       movieList: [],
+      movieListDropdown: [],
       isLoading: false,
       fullPage: true,
     };
@@ -65,7 +91,16 @@ export default {
     Loading,
   },
   methods: {
-    searchMovie: function () {
+    dropdownSearch: async function() {
+      const response = await axios.get(
+        `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
+      );
+      console.log(this.search);
+      console.log(response.data.Search);
+      this.movieListDropdown = response.data.Search;
+      console.log(this.movieListDropdown === undefined);
+    },
+    searchMovie: function() {
       if (this.search.trim().length == 0) {
         this.$alert("Search query cannot be empty.", "", "warning");
         return;
@@ -96,7 +131,7 @@ export default {
       }
       console.log(this.search);
     },
-    addToList: function (index) {
+    addToList: function(index) {
       axios
         .post(
           "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
@@ -112,11 +147,14 @@ export default {
       this.$alert("Movie added to your list.", "", "success");
       console.log(this.search);
     },
-    removeQuery: function () {
+    removeQuery: function() {
       this.search = "";
+      this.movieListDropdown = [];
+      this.movieListDropdown = undefined;
     },
   },
   async created() {
+    this.movieListDropdown = undefined;
     if (this.$route.query.searchQuery != undefined) {
       axios
         .get(
@@ -148,39 +186,44 @@ export default {
     padding-bottom: 20rem;
   }
 
-  .feature-card {
-    position: relative;
-  }
 
-  .featured-img {
-    display: block;
-    height: 300px;
-    width: 100%;
-    object-fit: cover;
-    position: relative;
-    z-index: 0;
-  }
-  .detail {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    h3 {
-      color: white;
-      padding: 10px;
-    }
-    p {
-      color: white;
-      padding: 10px;
-    }
-  }
+
   .search-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 16px;
     align-items: center;
+    .dropdown {
+      background: white;
+      position: absolute;
+      padding: 20px;
+      top: 175px;
+      width: 100%;
+      border: 5px solid rgb(48, 48, 48);
+      border-radius: 8px;
+      a {
+        color: rgb(41, 41, 41) !important;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+      ul {
+        margin-bottom: 0;
+        list-style-type: none;
+        li {
+          color: black;
+          margin-top: 10px;
+          padding: 5px;
+          &:hover {
+            color: black;
+            background: rgb(247, 247, 247);
+            border-radius: 8px;
+            padding: 5px;
+          }
+        }
+      }
+    }
     .fa-times-circle {
       color: black;
       position: relative;
