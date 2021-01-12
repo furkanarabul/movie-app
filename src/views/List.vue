@@ -18,7 +18,10 @@
           >
             <li class="movieItem">
               {{ movie.title }}
-              <button @click.stop.prevent="removeMovie(index)" class="removeBtn">
+              <button
+                @click.stop.prevent="removeMovie(index)"
+                class="removeBtn"
+              >
                 <i class="fas fa-trash"></i>
               </button>
             </li>
@@ -33,7 +36,10 @@
             </button>
           </router-link>
           <div class="vld-parent">
-            <loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
+            <loading
+              :active.sync="isLoading"
+              :is-full-page="fullPage"
+            ></loading>
           </div>
         </div>
       </div>

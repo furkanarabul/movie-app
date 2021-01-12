@@ -91,7 +91,7 @@ export default {
     Loading,
   },
   methods: {
-    dropdownSearch: async function() {
+    dropdownSearch: async function () {
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
       );
@@ -100,7 +100,7 @@ export default {
       this.movieListDropdown = response.data.Search;
       console.log(this.movieListDropdown === undefined);
     },
-    searchMovie: function() {
+    searchMovie: function () {
       if (this.search.trim().length == 0) {
         this.$alert("Search query cannot be empty.", "", "warning");
         return;
@@ -131,7 +131,7 @@ export default {
       }
       console.log(this.search);
     },
-    addToList: function(index) {
+    addToList: function (index) {
       axios
         .post(
           "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
@@ -147,7 +147,7 @@ export default {
       this.$alert("Movie added to your list.", "", "success");
       console.log(this.search);
     },
-    removeQuery: function() {
+    removeQuery: function () {
       this.search = "";
       this.movieListDropdown = [];
       this.movieListDropdown = undefined;
@@ -185,8 +185,6 @@ export default {
     background: no-repeat center/100% url("images/bg.jpg");
     padding-bottom: 20rem;
   }
-
-
 
   .search-box {
     display: flex;
