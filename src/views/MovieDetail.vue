@@ -117,8 +117,10 @@ export default {
           rating: 0,
         }
       );
-      e.target.parentElement.remove();
-      this.$alert("Movie added to your list.", "", "success");
+      this.$alert("Movie added to your list.", "", "success").then(() =>
+        this.$router.push(`/list/${sendData.data.name}`)
+      );
+      console.log(sendData.data.name);
     },
     setRating: async function () {
       const response = await this.updateMovieRating(this.rating);
