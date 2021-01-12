@@ -212,12 +212,13 @@ export default {
         li {
           color: black;
           margin-top: 10px;
-          padding: 5px;
+          padding: 7px;
           &:hover {
-            color: black;
-            background: rgb(247, 247, 247);
-            border-radius: 8px;
-            padding: 5px;
+            color: #000000;
+            background: #f1f1f1;
+            border-radius: 5px;
+            padding: 7px;
+            transition: 0.4s;
           }
         }
       }
