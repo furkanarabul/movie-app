@@ -105,18 +105,24 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  &:hover {
+    text-decoration: none !important;
+  }
+}
 .movieList {
   display: flex;
   flex-direction: column;
   .movieItem {
     margin-top: 20px;
-    background: transparent;
-    border: 2px solid white;
+    background: rgb(20, 20, 20);
+    border: 2px solid rgb(37, 37, 37);
     color: white;
     min-height: 50px;
     padding: 20px;
     border-radius: 8px;
     display: flex;
+
     &:hover {
       background: rgb(29, 29, 29);
       transition: 0.4s;

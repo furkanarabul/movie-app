@@ -16,7 +16,7 @@
           ></i>
         </div>
         <div
-          v-if="!(movieListDropdown === undefined)"
+          v-if="showDropdown"
           class="col-md-8 col-sm-8 col-10 text-white dropdown"
         >
           <ul>
@@ -90,6 +90,11 @@ export default {
   components: {
     Loading,
   },
+  computed: {
+    showDropdown: function () {
+      return !(this.movieListDropdown === undefined);
+    },
+  },
   methods: {
     dropdownSearch: async function () {
       const response = await axios.get(
@@ -129,7 +134,6 @@ export default {
             //this.search = "";
           });
       }
-      console.log(this.search);
     },
     addToList: function (index) {
       axios
