@@ -41,8 +41,10 @@ export default {
     background: transparentize(#42b883, 0.5);
   }
 }
-body {
+body{
+    background: no-repeat center/100% url("views/images/bg.jpg");
   background-color: #000000;
+  background-size: cover;
 }
 a {
   text-decoration: none;
@@ -58,8 +60,7 @@ header {
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 10px 16px;
-  background-color: #131313;
+  padding: 25px 25px;
   text-align: left;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
   h1 {
@@ -84,6 +85,12 @@ header {
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
+  &:active{
+    outline:none
+  }
+  &:focus{
+    outline:none
+  }
   &:hover {
     background-color: #3f3f3f;
     transition: all 0.4s ease;

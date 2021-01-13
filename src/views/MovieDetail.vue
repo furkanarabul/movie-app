@@ -75,7 +75,7 @@ export default {
   components: {
     StarRating,
   },
-  data: function () {
+  data: function() {
     return {
       imdbId: null,
       movie: null,
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     //check if request come from List or Search page
-    isMovieDetail: function () {
+    isMovieDetail: function() {
       return this.$router.history.current.name === "MovieDetail";
     },
   },
@@ -105,7 +105,7 @@ export default {
     this.movie = await this.getMovieFromAPI(this.imdbId);
   },
   methods: {
-    addToList: async function (e) {
+    addToList: async function(e) {
       const sendData = await axios.post(
         `https://movie-app-52779-default-rtdb.firebaseio.com/movieList/.json`,
         {
@@ -122,27 +122,27 @@ export default {
       );
       console.log(sendData.data.name);
     },
-    setRating: async function () {
+    setRating: async function() {
       const response = await this.updateMovieRating(this.rating);
     },
-    setReview: async function () {
+    setReview: async function() {
       const response = await this.updateMovieReview(this.review);
     },
-    getMovieFromDB: async function (key) {
+    getMovieFromDB: async function(key) {
       const response = await axios.get(
         `https://movie-app-52779-default-rtdb.firebaseio.com/movieList/${key}/.json`
       );
 
       return response.data;
     },
-    getMovieFromAPI: async function (id) {
+    getMovieFromAPI: async function(id) {
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=f9179f20&i=${id}&plot=full`
       );
 
       return response.data;
     },
-    updateMovieRating: async function (rating) {
+    updateMovieRating: async function(rating) {
       const response = await axios.patch(
         "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
           this.$route.params.firebaseKey +
@@ -152,7 +152,7 @@ export default {
 
       return response.data;
     },
-    updateMovieReview: async function (review) {
+    updateMovieReview: async function(review) {
       const response = await axios.patch(
         "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
           this.$route.params.firebaseKey +
@@ -166,6 +166,9 @@ export default {
 </script>
 
 <style lang="scss">
+img {
+  border: 5px solid white;
+}
 .add-btn {
   width: 100%;
   appearance: none;
@@ -178,6 +181,12 @@ export default {
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 700;
+  &:active {
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+  }
   &:hover {
     background-color: #1faf4f;
     transition: all 0.4s ease;
@@ -226,9 +235,9 @@ span:hover {
   textarea {
     color: rgb(224, 224, 224);
     background: rgb(15, 15, 15);
+    border: 1px solid rgb(90, 90, 90);
     padding: 10px;
     appearance: none;
-    border: none;
     width: 100%;
     border-radius: 5px;
     min-height: 10rem;
