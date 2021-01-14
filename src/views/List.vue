@@ -28,7 +28,7 @@
           </router-link>
         </ul>
         <div v-if="isEmpty" class="empty">
-          <p>List is empty. You can search some film.</p>
+          <p class="text-uppercase">List is empty.<br /></p>
           <router-link to="/search">
             <button class="mt-3 submit">
               Add film to the list
@@ -83,12 +83,12 @@ export default {
       });
   },
   computed: {
-    isEmpty: function () {
+    isEmpty: function() {
       return this.movieList.length === 0;
     },
   },
   methods: {
-    removeMovie: function (index) {
+    removeMovie: function(index) {
       this.$confirm("Are you sure?").then(() => {
         axios
           .delete(
@@ -151,7 +151,7 @@ a {
   font-size: 2rem;
   text-align: center;
   p {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 .submit {

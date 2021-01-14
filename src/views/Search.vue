@@ -1,18 +1,30 @@
 <template>
   <div class="container">
     <div class="home">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="text-white text-center text-uppercase">
+            Keep track of the movies you have watched!
+          </h4>
+          <h5 class="text-white text-center mt-3">
+            Search from thousands of movies
+          </h5>
+        </div>
+      </div>
+
       <form @submit.prevent="searchMovie" class="search-box">
         <div class="col-md-12 p-0 mt-3 d-flex">
+          <i class="fas fa-search"></i>
           <input
             v-on:keyup="dropdownSearch"
             v-model="search"
             type="text"
-            placeholder="Search Film"
+            placeholder="Search Movie"
           />
           <i
             v-if="search.length > 0"
             @click="removeQuery"
-            class="fas fa-times-circle"
+            class="fas fa-times"
           ></i>
         </div>
         <div
@@ -34,7 +46,7 @@
             </li>
           </ul>
         </div>
-        <input type="submit" value="Search" />
+        <input class="mt-3" type="submit" value="Search" />
       </form>
 
       <div class="movies-list">
@@ -181,6 +193,12 @@ export default {
 }
 
 .home {
+  h4 {
+    opacity: 0.8;
+  }
+  h5 {
+    opacity: 0.5;
+  }
   .search-box {
     display: flex;
     flex-direction: column;
@@ -191,7 +209,10 @@ export default {
       background: white;
       position: absolute;
       padding: 20px;
-      top: 205px;
+      top: 285px;
+      @media only screen and (max-width: 768px) {
+        top: 320px;
+      }
       width: 100%;
       border: 5px solid rgb(48, 48, 48);
       border-radius: 8px;
@@ -218,7 +239,13 @@ export default {
         }
       }
     }
-    .fa-times-circle {
+    .fa-search {
+      color: gray;
+      position: relative;
+      left: 35px;
+      top: 22px;
+    }
+    .fa-times {
       color: black;
       position: relative;
       right: 35px;
@@ -237,11 +264,11 @@ export default {
       background: none;
       &[type="text"] {
         width: 100%;
-        color: black;
+        color: rgb(65, 65, 65);
         background-color: white;
         border: 5px solid rgb(48, 48, 48);
         font-size: 20px;
-        padding: 10px 16px;
+        padding: 10px 40px 16px;
         border-radius: 8px;
         margin-bottom: 15px;
         transition: 0.4s;
@@ -249,7 +276,7 @@ export default {
           color: gray;
         }
         &:focus {
-          opacity: 1;
+          border: 5px solid rgb(90, 90, 90);
         }
       }
       &[type="submit"] {
