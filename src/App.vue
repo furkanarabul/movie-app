@@ -2,17 +2,13 @@
   <div>
     <header>
       <router-link to="/">
-        <h1>
-          <span>My</span>Movies
-        </h1>
+        <h1><span>My</span>Movies</h1>
       </router-link>
 
-      <router-link v-if="!
-      notHomePage" class="ml" to="/">
+      <router-link v-if="!notHomePage" class="ml" to="/">
         <button class="myListBtn">My List</button>
       </router-link>
-      <router-link v-if="
-      notHomePage" class="ml" to="/search">
+      <router-link v-if="notHomePage" class="ml" to="/search">
         <button class="myListBtn">Add Movie</button>
       </router-link>
     </header>
@@ -41,10 +37,10 @@ export default {
     background: transparentize(#42b883, 0.5);
   }
 }
-body{
-    background: no-repeat center/100% url("views/images/bg.jpg");
+body {
+  background: no-repeat url("views/images/bg.jpg");
   background-color: #000000;
-  background-size: cover;
+  background-size: inherit;
 }
 a {
   text-decoration: none;
@@ -85,11 +81,11 @@ header {
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  &:active{
-    outline:none
+  &:active {
+    outline: none;
   }
-  &:focus{
-    outline:none
+  &:focus {
+    outline: none;
   }
   &:hover {
     background-color: #3f3f3f;
