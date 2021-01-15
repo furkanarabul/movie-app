@@ -13,7 +13,7 @@
       </div>
 
       <form @submit.prevent="searchMovie" class="search-box">
-        <div class="col-md-12 p-0 mt-3 d-flex">
+        <div class="col-md-12 p-0 mt-3 d-flex justify-content-between flex-row">
           <i class="fas fa-search"></i>
           <input
             v-on:keyup="dropdownSearch"
@@ -34,19 +34,29 @@
           <ul>
             <li v-for="movie in movieListDropdown" :key="movie.imdbID">
               <router-link
-                class="text-white"
+                class="text-white d-flex"
                 :to="{
                   path: `/movie/${movie.imdbID}`,
                   query: { searchQuery: search },
                 }"
               >
-                {{ movie.Title }}
-                <span class="float-right">{{ movie.Year }}</span>
+                <img
+                  v-if="!(movie.Poster === 'N/A')"
+                  v-bind:src="movie.Poster"
+                />
+                <span class="ml-2 flex-grow-2 align-self-center">{{
+                  movie.Title
+                }}</span>
+                <span class="ml-3float-right movie-year align-self-center">{{
+                  movie.Year
+                }}</span>
               </router-link>
             </li>
           </ul>
         </div>
+        <!--
         <input class="mt-3" type="submit" value="Search" />
+        -->
       </form>
 
       <div class="movies-list">
@@ -238,6 +248,24 @@ export default {
           color: black;
           margin-top: 10px;
           padding: 7px;
+          img {
+            width: 8%;
+            @media only screen and (max-width: 768px) {
+              width: 15%;
+            }
+          }
+          .flex-grow-2 {
+            flex-grow: 2;
+          }
+          .movie-year {
+            background: #f7af2b;
+            border-radius: 2px;
+            color: #3b2b0c;
+            font-weight: bolder;
+            padding: 3px;
+            height: 50%;
+            font-size: 0.9rem;
+          }
           &:hover {
             color: #000000;
             background: #f1f1f1;
