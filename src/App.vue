@@ -2,14 +2,24 @@
   <div>
     <header>
       <router-link to="/">
-        <h1><span>My</span>Movies</h1>
+        <h1>
+          <span>My</span>Movies
+        </h1>
       </router-link>
 
       <router-link v-if="!notHomePage" class="ml" to="/">
-        <button class="myListBtn">My List</button>
+        <button class="myListBtn">
+          <span>
+            <i class="fas fa-list-ul text-white mr-2"></i>
+          </span>My List
+        </button>
       </router-link>
       <router-link v-if="notHomePage" class="ml" to="/search">
-        <button class="myListBtn">Add Movie</button>
+        <button class="myListBtn">
+          <span>
+            <i class="fas fa-plus-square text-white mr-2"></i>
+          </span>Add Movie
+        </button>
       </router-link>
     </header>
     <main>

@@ -3,12 +3,10 @@
     <div class="home">
       <div class="row">
         <div class="col-md-12">
-          <h4 class="text-white text-center text-uppercase">
-            Keep track of the movies you have watched!
-          </h4>
-          <h5 class="text-white text-center mt-3">
-            Search from thousands of movies
-          </h5>
+          <h4
+            class="text-white text-center text-uppercase"
+          >Keep track of the movies you have watched!</h4>
+          <h5 class="text-white text-center mt-3">Search from thousands of movies</h5>
         </div>
       </div>
 
@@ -21,15 +19,11 @@
             type="text"
             placeholder="Search Movie"
           />
-          <i
-            v-if="search.length > 0"
-            @click="removeQuery"
-            class="fas fa-times"
-          ></i>
+          <i v-if="search.length > 0" @click="removeQuery" class="fas fa-times"></i>
         </div>
         <div
           v-if="showDropdown"
-          class="col-md-8 col-sm-8 col-10 text-white dropdown"
+          class="col-xl-6 col-lg-10 col-md-8 col-sm-6 col-10 text-white dropdown"
         >
           <ul>
             <li v-for="movie in movieListDropdown" :key="movie.imdbID">
@@ -40,16 +34,17 @@
                   query: { searchQuery: search },
                 }"
               >
-                <img
-                  v-if="!(movie.Poster === 'N/A')"
-                  v-bind:src="movie.Poster"
-                />
-                <span class="ml-2 flex-grow-2 align-self-center">{{
+                <img v-if="!(movie.Poster === 'N/A')" v-bind:src="movie.Poster" />
+                <span class="ml-2 flex-grow-2 align-self-center">
+                  {{
                   movie.Title
-                }}</span>
-                <span class="ml-3float-right movie-year align-self-center">{{
+                  }}
+                </span>
+                <span class="ml-3float-right movie-year align-self-center">
+                  {{
                   movie.Year
-                }}</span>
+                  }}
+                </span>
               </router-link>
             </li>
           </ul>
@@ -89,11 +84,7 @@
     </div>
     <!--spin loader-->
     <div class="vld-parent">
-      <loading
-        :active.sync="isLoading"
-        :can-cancel="true"
-        :is-full-page="fullPage"
-      ></loading>
+      <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
     </div>
   </div>
 </template>
@@ -228,6 +219,8 @@ export default {
       background: white;
       position: absolute;
       padding: 20px;
+      max-height: 50vh;
+      overflow: auto;
       top: 285px;
       @media only screen and (max-width: 768px) {
         top: 320px;
