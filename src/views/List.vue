@@ -180,7 +180,7 @@ a {
   color: rgb(100, 100, 100);
   span {
     font-weight: 700;
-    text-decoration: underline;
+    color: #cc8d19;
   }
 }
 </style>
