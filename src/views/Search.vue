@@ -52,7 +52,11 @@
       <div class="movies-list">
         <ul class="movie-container">
           <li v-for="(movie, index) in movieList" :key="movie.imdbID">
-            <img v-bind:src="movie.Poster" v-bind:alt="movie.Title" />
+            <img
+              v-if="!(movie.Poster === 'N/A')"
+              v-bind:src="movie.Poster"
+              v-bind:alt="movie.Title"
+            />
             <div class="movie-details mt-3">
               <p class="year">{{ movie.Year }}</p>
               <p class="title">{{ movie.Title }}</p>
@@ -103,12 +107,12 @@ export default {
     Loading,
   },
   computed: {
-    showDropdown: function() {
+    showDropdown: function () {
       return !(this.movieListDropdown === undefined);
     },
   },
   methods: {
-    dropdownSearch: async function() {
+    dropdownSearch: async function () {
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
       );
@@ -117,7 +121,7 @@ export default {
       this.movieListDropdown = response.data.Search;
       console.log(this.movieListDropdown === undefined);
     },
-    searchMovie: function() {
+    searchMovie: function () {
       if (this.search.trim().length == 0) {
         this.$alert("Search query cannot be empty.", "", "warning");
         return;
@@ -147,7 +151,7 @@ export default {
           });
       }
     },
-    addToList: function(index) {
+    addToList: function (index) {
       axios
         .post(
           "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
@@ -163,13 +167,18 @@ export default {
       this.$alert("Movie added to your list.", "", "success");
       console.log(this.search);
     },
-    removeQuery: function() {
+    removeQuery: function () {
       this.search = "";
       this.movieListDropdown = [];
       this.movieListDropdown = undefined;
     },
   },
   async created() {
+    this.isLoading = true;
+    // simulate AJAX
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 200);
     this.movieListDropdown = undefined;
     if (this.$route.query.searchQuery != undefined) {
       axios
@@ -214,7 +223,7 @@ export default {
         top: 320px;
       }
       width: 100%;
-      border: 5px solid rgb(48, 48, 48);
+      border: 5px solid rgb(90, 90, 90);
       border-radius: 8px;
       a {
         color: rgb(41, 41, 41) !important;

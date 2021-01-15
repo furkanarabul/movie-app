@@ -67,7 +67,7 @@ export default {
     // simulate AJAX
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000);
+    }, 750);
     axios
       .get("https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
@@ -83,12 +83,12 @@ export default {
       });
   },
   computed: {
-    isEmpty: function() {
+    isEmpty: function () {
       return this.movieList.length === 0;
     },
   },
   methods: {
-    removeMovie: function(index) {
+    removeMovie: function (index) {
       this.$confirm("Are you sure?").then(() => {
         axios
           .delete(
