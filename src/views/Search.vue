@@ -252,6 +252,7 @@ export default {
             width: 8%;
             @media only screen and (max-width: 768px) {
               width: 15%;
+              height: 15%;
             }
           }
           .flex-grow-2 {
