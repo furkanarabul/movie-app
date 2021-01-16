@@ -2,6 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div v-if="!isEmpty">
+          <h3 class="text-white">Your List</h3>
+          <h4 class="text-white">
+            Here you can list your movies, you can review and rate them.
+          </h4>
+        </div>
+
         <div class="mt-3 text-right" v-if="!isEmpty">
           <div class="counter">
             You have
@@ -105,6 +112,12 @@ export default {
 </script>
 
 <style lang="scss">
+h3 {
+  opacity: 0.8;
+}
+h4 {
+  opacity: 0.5;
+}
 a {
   &:hover {
     text-decoration: none !important;

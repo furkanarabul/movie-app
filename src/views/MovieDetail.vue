@@ -24,7 +24,11 @@
         <div class="col-md-6 mt-3 text-white">
           <h3 class="text-white">{{ movie.Title }}</h3>
           <h4 class="text-white">{{ movie.Year }}</h4>
-          <img v-if="!(movie.Poster === 'N/A')" class="mt-3" v-bind:src="movie.Poster" />
+          <img
+            v-if="!(movie.Poster === 'N/A')"
+            class="mt-3"
+            v-bind:src="movie.Poster"
+          />
           <p class="mt-3" v-else>
             <i class="fas fa-unlink mr-2"></i>Cover has not found
           </p>
@@ -34,8 +38,12 @@
           </p>
         </div>
         <div class="col-md-6 mt-5 text-white">
-          <div class="col-md-4 mt-3 mb-5" style="padding: 0">
-            <button v-if="isMovieDetail" @click="addToList" class="add-btn mt-2">
+          <div class="col-md-4" style="padding: 0">
+            <button
+              v-if="isMovieDetail"
+              @click="addToList"
+              class="add-btn mt-2"
+            >
               Add to list
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
@@ -50,9 +58,17 @@
               @rating-selected="setRating"
               class="mt-5"
             />
-            <i class="fas fa-quote-right float-right fa-2x" style="opacity: 0.2"></i>
+            <i
+              class="fas fa-quote-right float-right fa-2x"
+              style="opacity: 0.2"
+            ></i>
 
-            <textarea placeholder="Type your review" class="mt-3" type="text" v-model="review" />
+            <textarea
+              placeholder="Type your review"
+              class="mt-3"
+              type="text"
+              v-model="review"
+            />
             <hr />
             <button @click="updateMovieReview">Save Review</button>
           </div>
