@@ -24,11 +24,7 @@
         <div class="col-md-6 mt-3 text-white">
           <h3 class="text-white">{{ movie.Title }}</h3>
           <h4 class="text-white">{{ movie.Year }}</h4>
-          <img
-            v-if="!(movie.Poster === 'N/A')"
-            class="mt-3"
-            v-bind:src="movie.Poster"
-          />
+          <img v-if="!(movie.Poster === 'N/A')" class="mt-3" v-bind:src="movie.Poster" />
           <p class="mt-3" v-else>
             <i class="fas fa-unlink mr-2"></i>Cover has not found
           </p>
@@ -39,11 +35,7 @@
         </div>
         <div class="col-md-6 mt-5 text-white">
           <div class="col-md-4" style="padding: 0">
-            <button
-              v-if="isMovieDetail"
-              @click="addToList"
-              class="add-btn mt-2"
-            >
+            <button v-if="isMovieDetail" @click="addToList" class="add-btn mt-2">
               Add to list
               <i class="ml-1 fas fa-plus-square"></i>
             </button>
@@ -58,22 +50,18 @@
               @rating-selected="setRating"
               class="mt-5"
             />
-            <i
-              class="fas fa-quote-right float-right fa-2x"
-              style="opacity: 0.2"
-            ></i>
+            <i class="fas fa-quote-right float-right fa-2x" style="opacity: 0.2"></i>
 
-            <textarea
-              placeholder="Type your review"
-              class="mt-3"
-              type="text"
-              v-model="review"
-            />
+            <textarea placeholder="Type your review" class="mt-3" type="text" v-model="review" />
             <hr />
             <button @click="updateMovieReview">Save Review</button>
           </div>
         </div>
       </div>
+    </div>
+    <!--spin loader-->
+    <div class="vld-parent">
+      <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
     </div>
   </div>
 </template>
@@ -81,9 +69,12 @@
 <script>
 import axios from "axios";
 import StarRating from "vue-star-rating";
+import Loading from "vue-loading-overlay";
+
 export default {
   components: {
     StarRating,
+    Loading,
   },
   data: function () {
     return {
@@ -91,6 +82,8 @@ export default {
       movie: null,
       rating: 0,
       review: null,
+      isLoading: false,
+      fullPage: true,
     };
   },
   computed: {
@@ -99,7 +92,17 @@ export default {
       return this.$router.history.current.name === "MovieDetail";
     },
   },
+  watch: {
+    $route(to, from) {
+      this.$router.go(this.$router.currentRoute);
+    },
+  },
   async created() {
+    this.isLoading = true;
+    // simulate AJAX
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
     if (this.isMovieDetail) {
       this.imdbId = this.$route.params.imdbId;
     } else {
@@ -130,7 +133,6 @@ export default {
       this.$alert("Movie added to your list.", "", "success").then(() =>
         this.$router.push(`/list/${sendData.data.name}`)
       );
-      console.log(sendData.data.name);
     },
     setRating: async function () {
       const response = await this.updateMovieRating(this.rating);

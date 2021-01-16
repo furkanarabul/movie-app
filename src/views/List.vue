@@ -4,9 +4,7 @@
       <div class="col-md-12">
         <div v-if="!isEmpty">
           <h3 class="text-white">Your List</h3>
-          <h4 class="text-white">
-            Here you can list your movies, you can review and rate them.
-          </h4>
+          <h4 class="text-white">Here you can list your movies, you can review and rate them.</h4>
         </div>
 
         <div class="mt-3 text-right" v-if="!isEmpty">
@@ -25,17 +23,17 @@
           >
             <li class="movieItem">
               {{ movie.title }}
-              <button
-                @click.stop.prevent="removeMovie(index)"
-                class="removeBtn"
-              >
+              <button @click.stop.prevent="removeMovie(index)" class="removeBtn">
                 <i class="fas fa-trash"></i>
               </button>
             </li>
           </router-link>
         </ul>
         <div v-if="isEmpty" class="empty">
-          <p class="text-uppercase">List is empty.<br /></p>
+          <p class="text-uppercase">
+            List is empty.
+            <br />
+          </p>
           <router-link to="/search">
             <button class="mt-3 submit">
               Add film to the list
@@ -43,10 +41,7 @@
             </button>
           </router-link>
           <div class="vld-parent">
-            <loading
-              :active.sync="isLoading"
-              :is-full-page="fullPage"
-            ></loading>
+            <loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
           </div>
         </div>
       </div>

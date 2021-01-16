@@ -123,11 +123,14 @@ export default {
       console.log(this.movieListDropdown === undefined);
     },
     searchMovie: function () {
+      const dropdown = document.querySelector(".dropdown");
+
       if (this.search.trim().length == 0) {
         this.$alert("Search query cannot be empty.", "", "warning");
         return;
       }
       if (this.search != "") {
+        dropdown.classList.toggle("hide");
         axios
           .get(
             `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
@@ -373,17 +376,16 @@ export default {
           appearance: none;
           border: 1px solid rgb(61, 61, 61);
           outline: none;
-          background-color: transparent;
+          background-color: #f7af2b;
           padding: 8px;
           border-radius: 8px;
-          color: gray;
+          color: #3b2b0c;
           font-size: 14px;
           text-transform: uppercase;
           font-weight: 700;
           &:hover {
-            background-color: #353535;
+            background-color: #ce911f;
             transition: all 0.4s ease;
-            color: white;
           }
         }
         .add-btn {
@@ -406,5 +408,8 @@ export default {
       }
     }
   }
+}
+.hide {
+  display: none;
 }
 </style>
