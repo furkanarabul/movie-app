@@ -3,10 +3,12 @@
     <div class="home">
       <div class="row">
         <div class="col-md-12">
-          <h4
-            class="text-white text-center text-uppercase"
-          >Keep track of the movies you have watched!</h4>
-          <h5 class="text-white text-center mt-3">Search from thousands of movies</h5>
+          <h4 class="text-white text-center text-uppercase">
+            Keep track of the movies you have watched!
+          </h4>
+          <h5 class="text-white text-center mt-3">
+            Search from thousands of movies
+          </h5>
         </div>
       </div>
 
@@ -19,7 +21,11 @@
             type="text"
             placeholder="Search Movie"
           />
-          <i v-if="search.length > 0" @click="removeQuery" class="fas fa-times"></i>
+          <i
+            v-if="search.length > 0"
+            @click="removeQuery"
+            class="fas fa-times"
+          ></i>
         </div>
         <div
           v-if="showDropdown"
@@ -34,16 +40,15 @@
                   query: { searchQuery: search },
                 }"
               >
-                <img v-if="!(movie.Poster === 'N/A')" v-bind:src="movie.Poster" />
+                <img
+                  v-if="!(movie.Poster === 'N/A')"
+                  v-bind:src="movie.Poster"
+                />
                 <span class="ml-2 flex-grow-2 align-self-center">
-                  {{
-                  movie.Title
-                  }}
+                  {{ movie.Title }}
                 </span>
                 <span class="ml-3float-right movie-year align-self-center">
-                  {{
-                  movie.Year
-                  }}
+                  {{ movie.Year }}
                 </span>
               </router-link>
             </li>
@@ -84,7 +89,11 @@
     </div>
     <!--spin loader-->
     <div class="vld-parent">
-      <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
+      <loading
+        :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="fullPage"
+      ></loading>
     </div>
   </div>
 </template>
@@ -117,10 +126,8 @@ export default {
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=f9179f20&s=${this.search}&plot=full`
       );
-      console.log(this.search);
-      console.log(response.data.Search);
+
       this.movieListDropdown = response.data.Search;
-      console.log(this.movieListDropdown === undefined);
     },
     searchMovie: function () {
       const dropdown = document.querySelector(".dropdown");
@@ -169,7 +176,6 @@ export default {
         )
         .then((response) => {});
       this.$alert("Movie added to your list.", "", "success");
-      console.log(this.search);
     },
     removeQuery: function () {
       this.search = "";
@@ -190,7 +196,6 @@ export default {
           `https://www.omdbapi.com/?apikey=f9179f20&s=${this.$route.query.searchQuery}&plot=full`
         )
         .then((response) => {
-          console.log(response);
           this.movieList = response.data.Search;
           this.search = this.$route.query.searchQuery;
         });
