@@ -2,7 +2,7 @@
 
 • I built a single-page **movie-list tracker** app with vuejs.
 
-• It allows to search for a movie then user can add it to his/her list and **rate & review.**
+• It allows searching for a movie then the user can add it to his/her list and **rate & review.**
 
 • Movies are provided by [OMDb API](http://www.omdbapi.com/).
 
