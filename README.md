@@ -2,7 +2,7 @@
 
 Live preview : https://movie-app-52779.web.app/
 
-![](recording.gif){:height="50%" width="50%"}
+![](recording.gif)
 
 ## Project setup
 
