@@ -1,5 +1,13 @@
 # movie-app
 
+• I built a single-page movie-list tracker app with vuejs.
+
+• It allows to search for a movie then user can add it to his/her list and rate & review.
+
+• Movies are provided by OMDb API.
+
+• I used firebase for a simple real-time database.
+
 Live preview : https://movie-app-52779.web.app/
 
 ![](recording.gif)
