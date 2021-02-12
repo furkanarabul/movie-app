@@ -164,16 +164,13 @@ export default {
     },
     addToList: function (index) {
       axios
-        .post(
-          "https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json",
-          {
-            id: this.movieList[index].imdbID,
-            title: this.movieList[index].Title,
-            rating: 0,
-            review: "",
-            inList: true,
-          }
-        )
+        .post("https://movie-db1-default-rtdb.firebaseio.com/movieList.json", {
+          id: this.movieList[index].imdbID,
+          title: this.movieList[index].Title,
+          rating: 0,
+          review: "",
+          inList: true,
+        })
         .then((response) => {});
       this.$alert("Movie added to your list.", "", "success");
     },

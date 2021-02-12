@@ -4,7 +4,9 @@
       <div class="col-md-12">
         <div v-if="!isEmpty">
           <h3 class="text-white">Your List</h3>
-          <h4 class="text-white">Here you can list your movies, you can review and rate them.</h4>
+          <h4 class="text-white">
+            Here you can list your movies, you can review and rate them.
+          </h4>
         </div>
 
         <div class="mt-3 text-right" v-if="!isEmpty">
@@ -23,7 +25,10 @@
           >
             <li class="movieItem">
               {{ movie.title }}
-              <button @click.stop.prevent="removeMovie(index)" class="removeBtn">
+              <button
+                @click.stop.prevent="removeMovie(index)"
+                class="removeBtn"
+              >
                 <i class="fas fa-trash"></i>
               </button>
             </li>
@@ -41,7 +46,10 @@
             </button>
           </router-link>
           <div class="vld-parent">
-            <loading :active.sync="isLoading" :is-full-page="fullPage"></loading>
+            <loading
+              :active.sync="isLoading"
+              :is-full-page="fullPage"
+            ></loading>
           </div>
         </div>
       </div>
@@ -71,7 +79,7 @@ export default {
       this.isLoading = false;
     }, 750);
     axios
-      .get("https://movie-app-52779-default-rtdb.firebaseio.com/movieList.json")
+      .get("https://movie-db1-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
         for (let key in response.data) {
           let movieList = {
@@ -94,7 +102,7 @@ export default {
       this.$confirm("Are you sure?").then(() => {
         axios
           .delete(
-            "https://movie-app-52779-default-rtdb.firebaseio.com/movieList/" +
+            "https://movie-db1-default-rtdb.firebaseio.com/movieList/" +
               this.movieList[index].id +
               ".json"
           )
