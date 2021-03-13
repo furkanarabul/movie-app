@@ -141,7 +141,7 @@ export default {
   methods: {
     addToList: async function (e) {
       const sendData = await axios.post(
-        `https://movie-db1-default-rtdb.firebaseio.com/movieList/.json`,
+        `https://movie-d2b-default-rtdb.firebaseio.com/movieList/.json`,
         {
           title: this.movie.Title,
           id: this.movie.imdbID,
@@ -163,7 +163,7 @@ export default {
     },
     getMovieFromDB: async function (key) {
       const response = await axios.get(
-        `https://movie-db1-default-rtdb.firebaseio.com/movieList/${key}/.json`
+        `https://movie-d2b-default-rtdb.firebaseio.com/movieList/${key}/.json`
       );
 
       return response.data;
@@ -177,7 +177,7 @@ export default {
     },
     updateMovieRating: async function (rating) {
       const response = await axios.patch(
-        "https://movie-db1-default-rtdb.firebaseio.com/movieList/" +
+        "https://movie-d2b-default-rtdb.firebaseio.com/movieList/" +
           this.$route.params.firebaseKey +
           ".json",
         { rating: this.rating }
@@ -187,7 +187,7 @@ export default {
     },
     updateMovieReview: async function (review) {
       const response = await axios.patch(
-        "https://movie-db1-default-rtdb.firebaseio.com/movieList/" +
+        "https://movie-d2b-default-rtdb.firebaseio.com/movieList/" +
           this.$route.params.firebaseKey +
           ".json",
         { review: this.review }
