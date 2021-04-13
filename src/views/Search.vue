@@ -164,7 +164,7 @@ export default {
     },
     addToList: function (index) {
       axios
-        .post("https://movie-d2b-default-rtdb.firebaseio.com/movieList.json", {
+        .post("https://movie-d3b-default-rtdb.firebaseio.com/movieList.json", {
           id: this.movieList[index].imdbID,
           title: this.movieList[index].Title,
           rating: 0,
