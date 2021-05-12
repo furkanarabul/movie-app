@@ -79,7 +79,7 @@ export default {
       this.isLoading = false;
     }, 750);
     axios
-      .get("https://movie-d3b-default-rtdb.firebaseio.com/movieList.json")
+      .get("https://movie-d4b-default-rtdb.firebaseio.com/movieList.json")
       .then((response) => {
         for (let key in response.data) {
           let movieList = {
@@ -102,7 +102,7 @@ export default {
       this.$confirm("Are you sure?").then(() => {
         axios
           .delete(
-            "https://movie-d3b-default-rtdb.firebaseio.com/movieList/" +
+            "https://movie-d4b-default-rtdb.firebaseio.com/movieList/" +
               this.movieList[index].id +
               ".json"
           )
