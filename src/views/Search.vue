@@ -29,7 +29,11 @@
         </div>
         <div
           v-if="showDropdown"
-          class="col-xl-6 col-lg-10 col-md-8 col-sm-6 col-10 text-white dropdown"
+          class="
+            col-xl-6 col-lg-10 col-md-8 col-sm-6 col-10
+            text-white
+            dropdown
+          "
         >
           <ul>
             <li v-for="movie in movieListDropdown" :key="movie.imdbID">
@@ -164,7 +168,7 @@ export default {
     },
     addToList: function (index) {
       axios
-        .post("https://movie-d5b-default-rtdb.firebaseio.com/movieList.json", {
+        .post("https://movie-d6b-default-rtdb.firebaseio.com/movieList.json", {
           id: this.movieList[index].imdbID,
           title: this.movieList[index].Title,
           rating: 0,
