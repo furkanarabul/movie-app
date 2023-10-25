@@ -6,7 +6,7 @@
 
 • Movies are provided by [OMDb API](http://www.omdbapi.com/).
 
-• Live preview: movie-app-git-master-furkanarabul.vercel.app
+• Live preview: [movie-app-git-master-furkanarabul.vercel.app](https://movie-app-git-master-furkanarabul.vercel.app/)
 
 • I used **firebase** for a simple real-time database.
 
