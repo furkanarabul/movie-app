@@ -8,7 +8,6 @@
 
 • I used **firebase** for a simple real-time database.
 
-Live preview : https://movie-app-52779.web.app/
 
 ![](recording.gif)
 
