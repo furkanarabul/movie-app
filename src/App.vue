@@ -48,7 +48,7 @@ export default {
   }
 }
 body {
-  background: no-repeat url("views/images/bg.jpg");
+  background: url("views/images/bg.jpg");
   background-color: #000000;
   background-size: inherit;
 }
