@@ -26,6 +26,10 @@
             @click="removeQuery"
             class="fas fa-times"
           ></i>
+          <button class="btn search-button"
+            v-if="search.length >0"
+            @click="searchMovie"
+          >Search</button>
         </div>
         <div
           v-if="showDropdown"
@@ -165,6 +169,7 @@ export default {
             //this.search = "";
           });
       }
+      this.removeQuery();
     },
     addToList: function (index) {
       axios
@@ -278,6 +283,20 @@ export default {
           }
         }
       }
+    }
+    .search-button {
+        background-color: #f7af2b;
+        height: 65px;
+        color: #5f420c;
+        font-size: 16px;
+        text-transform: uppercase;
+        transition: 0.4s;
+        font-weight: 700;
+        border-radius: 8px;
+        &:hover {
+          background-color: #e49f1f;
+          transition: 0.4s;
+        }
     }
     .fa-search {
       color: gray;
